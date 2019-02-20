@@ -1,0 +1,4 @@
+modules = {
+    ["luray"] = "src/luray.lua",
+    ["luray.*"] = "src/",
+}
