@@ -21,5 +21,6 @@ build = {
     type = "builtin",
     modules = {
         luray = "src/luray.lua",
+        ["luray.matrix"] = "src/luray/matrix.lua",
     }
 }
