@@ -1,14 +1,16 @@
 local matrix = require'luray.matrix'
 local point,ispoint = matrix.point,matrix.ispoint
 local vector,isvector = matrix.vector,matrix.isvector
-local Intersectable = require'luray.intersectable'
-local Object = require'lucy.object'
+local Shape = require'luray.shape'
 local Ray = require'luray.ray'
 local Bounds = require'luray.bounds'
 local Transform = require'luray.transform'
 
-local Surface=Object'Surface'..Intersectable
-function Surface:__init() self.bounds = Bounds{} end
+local Surface=Shape'Surface'
+function Surface:__init()
+    Shape.__init(self)
+    self.bounds = Bounds{}
+end
 function Surface:__intersect(ray)
     local origo = point()
     return {(ray.origin-origo):norm()}

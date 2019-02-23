@@ -25,6 +25,7 @@ build = {
         ["luray.intersectable"] = "src/luray/intersectable.lua",
         ["luray.matrix"] = "src/luray/matrix.lua",
         ["luray.ray"] = "src/luray/ray.lua",
+        ["luray.shape"] = "src/luray/shape.lua",
         ["luray.transform"] = "src/luray/transform.lua",
         ["luray.transformable"] = "src/luray/transformable.lua",
     }
