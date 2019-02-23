@@ -1,0 +1,10 @@
+--- Table layouts used for simple data structures.
+-- This module is for documentation only, and does not exist as lua code
+-- @module struct
+
+--- A ray/object intersection
+-- @table intersection
+-- @tfield number t "time" of intersection, along ray
+-- @tfield Intersectable the intersected object
+-- @tfield luray.point point object space point of intersection
+-- @tfield luray.vector normal object space normal at intersection

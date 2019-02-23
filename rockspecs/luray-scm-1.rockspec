@@ -21,6 +21,11 @@ build = {
     type = "builtin",
     modules = {
         luray = "src/luray.lua",
+        ["luray.bounds"] = "src/luray/bounds.lua",
+        ["luray.intersectable"] = "src/luray/intersectable.lua",
         ["luray.matrix"] = "src/luray/matrix.lua",
+        ["luray.ray"] = "src/luray/ray.lua",
+        ["luray.transform"] = "src/luray/transform.lua",
+        ["luray.transformable"] = "src/luray/transformable.lua",
     }
 }
