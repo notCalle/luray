@@ -26,7 +26,7 @@
 
 require'numlua'
 local type = numlua.type
-local abs,pi = math.abs,math.pi
+local abs,pi,sqrt = math.abs,math.pi,math.sqrt
 local error,require,type = error,require,type
 local format = string.format
 local _ENV = {
@@ -49,6 +49,25 @@ function isclose(this,that)
         return not m:find(function(v) return abs(v) >= epsilon end)
     else
         error(format("can't compare %s with %s", type(this), type(that)))
+    end
+end
+
+--- Quadratic equation solver for real roots only
+-- @tparam number a x^2 coefficient
+-- @tparam number b x^1 coefficient
+-- @tparam number c x^0 coefficient
+-- @treturn number|nil first root
+-- @treturn number|nil second root, same as first => linear solution
+function quadratic(a,b,c)
+    local disc = b*b - 4*a*c
+    if disc < 0 then return
+    elseif disc == 0 then
+        local x = b/(-2*a)
+        return x,x
+    else
+        local d = sqrt(disc)
+        local r2a = 1/(-2*a)
+        return (b+d)*r2a,(b-d)*r2a
     end
 end
 
