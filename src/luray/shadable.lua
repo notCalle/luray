@@ -16,11 +16,11 @@ local function default_shader(hit)
     return hit.normalv:dot(hit.eyev)
 end
 
-function M:shade(hit)
+function M:shade(hit,lighting)
     local shade = 0
     local shaders = self._shaders or {default_shader}
     for _,shader in ipairs(shaders) do
-        shade = shade + shader(hit)
+        shade = shade + shader(hit,lighting)
     end
     return shade
 end
