@@ -18,7 +18,12 @@ describe("a sphere",function()
 
         it("has a normal opposite of the ray direction",
         function()
-            assert.is.close(hit.normal,-r.direction)
+            assert.is.close(hit.normalv,-r.direction)
+        end)
+
+        it("has a bright surface shade",
+        function()
+            assert.is.close(s:shade(hit),1)
         end)
     end)
 
@@ -28,7 +33,27 @@ describe("a sphere",function()
 
         it("has a normal perpendicular to the ray direction",
         function()
-            assert.is.close(0,hit.normal:dot(r.direction))
+            assert.is.close(0,hit.normalv:dot(r.direction))
+        end)
+
+        it("has a dark surface shade",
+        function()
+            assert.is.close(s:shade(hit),0)
+        end)
+    end)
+
+    context("when hit by a radial ray",function()
+        local r = Ray{origin=point(0,0,0),direction=vector(-1,0,0)}
+        local hit = r:cast(s):hit()
+
+        it("has a normal opposite of the ray direction",
+        function()
+            assert.is.close(hit.normalv,-r.direction)
+        end)
+
+        it("has a bright surface shade",
+        function()
+            assert.is.close(s:shade(hit),1)
         end)
     end)
 end)

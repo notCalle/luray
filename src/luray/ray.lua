@@ -43,15 +43,21 @@ function M:cast(world)
     return self
 end
 
---- Return the nearest intersection in front of origin
+--- Return the nearest intersection in front of origin.
+-- Augments the intersection with 'normalv' and 'eyev'.
+--
 -- @treturn struct.intersection|nil
--- @treturn point world space position of hit
 function M:hit()
     for _,i in ipairs(self) do
         local t = i.t
         if t > 0 then
-            i.normal = i.object:normal(i)
-            return i,self.origin+self.direction*t
+            local d = self.direction
+            local n = i.object:normal(i)
+            local p = self.origin + d*t
+            if d:dot(n) < 0 then i.normalv = n else i.normalv = -n end
+            i.origin = p
+            i.eyev = -self.direction
+            return i
         end
     end
 end

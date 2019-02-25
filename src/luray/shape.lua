@@ -3,17 +3,19 @@
 -- to define their intersection criteria. And the @{Shape:__normal}
 -- metamethod to define their normal vector where hit by a ray.
 --
+-- @classmod Shape
+-- @see Shadable
 -- @see Intersectable
 -- @see Transformable
--- @classmod Shape
 -- @usage
 -- Shape = require'luray.shape'
 -- Icosahedron = Shape'Icosahedron'
 
 local Object = require'lucy.object'
+local Shadable = require'luray.shadable'
 local Intersectable = require'luray.intersectable'
 local Transformable = require'luray.transformable'
-local M = Object'Shape'..Intersectable..Transformable
+local M = Object'Shape'..Shadable..Intersectable..Transformable
 _ENV=M
 
 function M:__init()

@@ -7,4 +7,6 @@
 -- @tfield number t "time" of intersection, along ray
 -- @tfield Intersectable the intersected object
 -- @tfield luray.point point object space point of intersection
--- @tfield luray.vector normal object space normal at intersection
+-- @tfield luray.point origin world space point of intersection
+-- @tfield luray.vector eyev world space eye direction at intersection
+-- @tfield luray.vector normalv world space normal at intersection

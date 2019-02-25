@@ -50,17 +50,11 @@ describe("a ray", function()
     context("when it hits something",function()
         local r = Ray{origin=point(1,0,0), direction=vector(-1,0,0)}
         local s = Surface{}
-        r:cast(s)
-        local hit,p = r:hit()
+        local hit = r:cast(s):hit()
 
         it("can find the intersection",
         function()
             assert.is.table(hit)
-        end)
-
-        it("can find the point of intersection",
-        function()
-            assert.is.point(p)
         end)
 
         context("the hit",function()
@@ -74,16 +68,22 @@ describe("a ray", function()
                 assert.is.equal(s,hit.object)
             end)
 
-            it("has the expected object point of intersection",
+            it("has the expected point of intersection",
             function()
-                assert.is.point(hit.point)
-                assert.is.close(hit.point,point())
+                assert.is.point(hit.origin)
+                assert.is.close(hit.origin,point())
             end)
 
-            it("has the expected object normal at intersection",
+            it("has the expected normal vector at intersection",
             function()
-                assert.is.vector(hit.normal)
-                assert.is.close(hit.normal,-r.direction)
+                assert.is.vector(hit.normalv)
+                assert.is.close(hit.normalv,-r.direction)
+            end)
+
+            it("has the expected eye vector at intersection",
+            function()
+                assert.is.vector(hit.eyev)
+                assert.is.close(hit.eyev,-r.direction)
             end)
         end)
     end)
