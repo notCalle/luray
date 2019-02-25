@@ -1,5 +1,6 @@
 modules = {
     ["luray"] = "src/luray.lua",
     ["luray.*"] = "src/",
+    ["luray.light.*"] = "src/",
     ["luray.shape.*"] = "src/",
 }
