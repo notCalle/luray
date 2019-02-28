@@ -9,7 +9,7 @@
 local tau = require'luray'.tau
 local sin,cos = math.sin,math.cos
 local matrix = require'luray.matrix'
-local eye = matrix.eye
+local eye,normalize = matrix.eye,matrix.normalize
 local ipairs,tostring,print = ipairs,tostring,print
 local Mixin = require'lucy.mixin'
 local M = Mixin'Transformable'
@@ -30,6 +30,20 @@ function M:__init_transform()
     self._transform = eye(4)
     self._inverse = self._transform
     self._invnormal = self._transform
+end
+
+function M:__edge_from(parent)
+    if self._parent then error("can't have more than one parent") end
+    self._parent = parent
+end
+
+function M:normal_to_world(n)
+    n = normalize(self._invnormal*n)
+    if self._parent then
+        return self._parent:normal_to_world(n)
+    else
+        return n
+    end
 end
 
 --- Rotate transform around the X axis

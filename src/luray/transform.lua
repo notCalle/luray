@@ -8,7 +8,7 @@
 local ipairs,tostring,print = ipairs,tostring,print
 local Transformable = require'luray.transformable'
 local Object = require'lucy.object'
-local M,_M = Object'Transform'..Transformable
+local M,_M = Object'Transform'+Transformable
 _ENV=M
 
 function M:__init()

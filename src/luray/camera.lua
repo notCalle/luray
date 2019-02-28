@@ -5,6 +5,7 @@
 -- Camera = require'luray.camera'
 -- mycamera = Camera{scene=myscene}
 
+local clock = os.clock
 local error,ipairs,math = error,ipairs,math
 local matrix = require'luray.matrix'
 local type = numlua.type
@@ -14,7 +15,7 @@ local Ray = require'luray.ray'
 local List = require'lucy.list'
 local Object = require'lucy.object'
 local Transformable = require'luray.transformable'
-local M = Object'Camera'..Transformable
+local M = Object'Camera'+Transformable
 _ENV=M
 
 function M:__init()
@@ -57,6 +58,7 @@ function M:shade(hit)
 end
 
 function M:render()
+    local t0 = clock()
     local pixbuf = pixel.buffer(self.width,self.height)
     for y = 1,self.height do
         for x = 1,self.width do
@@ -66,7 +68,8 @@ function M:render()
             pixbuf[y][x] = color
         end
     end
-    return pixbuf
+    local t1 = clock()
+    return pixbuf,{render_time=t1-t0,pixels=self.height*self.width}
 end
 
 return M

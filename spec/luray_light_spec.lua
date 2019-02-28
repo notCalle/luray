@@ -1,8 +1,9 @@
+local Graph = require'lucy.graph'
 local matrix = require'luray.matrix'
 local point,vector = matrix.point,matrix.vector
 local Sphere = require'luray.shape.sphere'
 local Ray = require'luray.ray'
-local Light = require'luray.light'
+local Transformable = require'luray.transformable'
 local Light = require'luray.light'
 
 local SubLight = Light'SubLight'
@@ -11,6 +12,16 @@ function SubLight:__lighting(hit)
 end
 
 describe("an abstract light",function()
+    it("can be a graph vertex",
+    function()
+        assert.is_true(Graph <= Light)
+    end)
+
+    it("can be transformed",
+    function()
+        assert.is_true(Transformable <= Light)
+    end)
+
     it("requires a concrete implementation of lighting calculations",
     function()
         local light = Light{}
@@ -18,7 +29,7 @@ describe("an abstract light",function()
                          "attempt to call a nil value (method '__lighting')")
     end)
 
-    context("subclass",function()
+    context("when subclassed",function()
         local shape = Sphere{}
         local ray = Ray{origin=point(2,0,0),direction=vector(-1,0,0)}
         local hit = ray:cast(shape):hit()

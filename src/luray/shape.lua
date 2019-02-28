@@ -11,25 +11,28 @@
 -- Shape = require'luray.shape'
 -- Icosahedron = Shape'Icosahedron'
 
+local error,format = error,string.format
+local Graph = require'lucy.graph'
 local Object = require'lucy.object'
 local Shadable = require'luray.shadable'
 local Intersectable = require'luray.intersectable'
 local Transformable = require'luray.transformable'
-local M = Object'Shape'..Shadable..Intersectable..Transformable
+local M = Object'Shape'+Graph+Shadable+Intersectable+Transformable
 _ENV=M
 
 function M:__init()
     self:__init_transform()
 end
 
+function M:__edge_to()
+    error(format("a %s can't have children",self.class))
+end
+
 --- Calculate the normal vector at an intersection
 -- @tparam struct.intersection hit the intersection
 -- @treturn matrix.vector normal vector in world space
 function M:normal(hit)
-    local transform = self._invnormal
-    if not transform then return self:__normal(hit)
-    else return transform * self:__normal(hit)
-    end
+    return self:normal_to_world(self:__normal(hit))
 end
 
 --- Abstract methods

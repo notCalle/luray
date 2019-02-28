@@ -7,8 +7,9 @@ local ipairs,rawset = ipairs,rawset
 local List = require'lucy.list'
 local ShadowRay = require'luray.ray'
 local Object = require'lucy.object'
+local Graph = require'lucy.graph'
 local Transformable = require'luray.transformable'
-local M = Object'Light'..Transformable
+local M = Object'Light'+Graph+Transformable
 _ENV = M
 
 --- Intensity

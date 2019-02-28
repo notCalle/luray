@@ -6,7 +6,7 @@ local Object = require'lucy.object'
 local Bounds = require'luray.bounds'
 
 describe("an intersectable object", function()
-    local Surface=Object'Surface'..Intersectable
+    local Surface=Object'Surface'+Intersectable
     Surface.bounds = Bounds{}
     function Surface:__intersect()
         return {1}
